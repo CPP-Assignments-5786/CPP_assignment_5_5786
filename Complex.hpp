@@ -2,15 +2,10 @@
  * @file Complex.hpp
  * @brief Header file for the Complex class
  *
- * This file demonstrates: 
- * - Conversion operators (NEW in Assignment 5) - multiple representations
- * - All operator overloading from Assignment 4
- * - All fundamental concepts from Assignments 1-3
- * 
  * Complex numbers can be represented as:
  * - Rectangular form: a + bi
  * - Polar form: r∠θ or r*e^(iθ)
- * - String:  "a+bi"
+ * - String: "a+bi"
  * - Magnitude: |z| = √(a² + b²)
  */
 
@@ -26,12 +21,6 @@ namespace complex_math {
     /**
      * @brief Complex class representing a complex number in rectangular form
      * z = a + bi where a is real part, b is imaginary part
-     * 
-     * Demonstrates:
-     * - Conversion operators (double, string, bool)
-     * - Arithmetic operators
-     * - Comparison operators
-     * - All previous concepts
      */
     class Complex {
     private:
@@ -168,7 +157,6 @@ namespace complex_math {
 
         /**
          * @brief Convert to double (returns magnitude)
-         * Example: double d = (double)z;  // d = |z|
          * @return Magnitude of complex number
          */
         operator double() const;
@@ -181,14 +169,12 @@ namespace complex_math {
 
         /**
          * @brief Convert to bool (check if non-zero)
-         * Example: if(z) { ... }  // true if z != 0
          * @return true if complex number is not zero
          */
         operator bool() const;
 
         /**
          * @brief Convert to string in rectangular form "a+bi"
-         * Example: string s = (string)z;  // s = "3+4i"
          * @return String representation
          */
         operator std::string() const;

@@ -2,17 +2,7 @@
  * @file ComplexArray.hpp
  * @brief Header file for the ComplexArray class
  *
- * This file EMPHASIZES:
- * - DEEP COPY CONSTRUCTOR (Assignment 5 focus)
- * - Composition (ComplexArray HAS-A Complex* dynamic array)
- * - Destruct-arrays
- * - All operator overloading
- * 
- * STUDENTS:  You MUST implement proper deep copy in: 
- * - Copy constructor
- * - Assignment operator
- * And proper cleanup in:
- * - Destructor
+ * A dynamic array of Complex numbers supporting deep copy semantics.
  */
 
 #ifndef COMPLEXARRAY_HPP
@@ -26,14 +16,6 @@ namespace complex_math {
 
     /**
      * @brief ComplexArray class - dynamic array of Complex numbers
-     * 
-     * COMPOSITION: ComplexArray HAS-A Complex* array
-     * 
-     * CRITICAL FOR STUDENTS: 
-     * This class demonstrates why deep copy is essential! 
-     * - Shallow copy would copy only the pointer
-     * - Deep copy must create NEW array and copy each element
-     * - Destructor must delete the array properly
      */
     class ComplexArray {
     private:
@@ -46,8 +28,7 @@ namespace complex_math {
         static int currentArrayCount;
 
         /**
-         * @brief Resize the internal array
-         * STUDENTS: Must create new array, copy elements, delete old array
+         * @brief Resize the internal array when capacity is exceeded
          */
         void resize();
 
@@ -57,15 +38,12 @@ namespace complex_math {
         /**
          * @brief Default constructor
          * Creates empty array with capacity 10
-         * STUDENTS: Allocate array: 
-         *   data = new Complex[capacity];
          */
         ComplexArray();
 
         /**
          * @brief Parameterized constructor
          * @param initialCapacity Initial capacity
-         * STUDENTS: Allocate array with given capacity
          */
         ComplexArray(int initialCapacity);
 
@@ -73,7 +51,6 @@ namespace complex_math {
          * @brief Constructor with initial values
          * @param values Array of complex numbers
          * @param count Number of elements
-         * STUDENTS: Allocate array and copy values
          */
         ComplexArray(const Complex* values, int count);
 
@@ -85,9 +62,6 @@ namespace complex_math {
 
         /**
          * @brief Destructor
-         * STUDENTS: Must delete the dynamic array: 
-         *   delete[] data;
-         * This prevents memory leaks!
          */
         ~ComplexArray();
 
@@ -125,12 +99,8 @@ namespace complex_math {
         // ============ Array Operations (Outline) ============
 
         /**
-         * @brief Add element to array
-         * Demonstrates:  reference parameter, composition
+         * @brief Add element to end of array
          * @param value Complex number to add
-         * STUDENTS: Store in array:
-         *   data[size] = value;
-         *   size++;
          */
         void add(const Complex& value);
 
@@ -146,7 +116,6 @@ namespace complex_math {
          * @brief Remove element at index
          * @param index Index to remove
          * @return true if successful
-         * STUDENTS:  Shift remaining elements down
          */
         bool remove(int index);
 
@@ -205,11 +174,9 @@ namespace complex_math {
 
         /**
          * @brief Access element by index (non-const)
-         * Allows:  arr[i] = Complex(3, 4);
          * @param index Index
          * @return Reference to element
          * @throws std::out_of_range if index invalid
-         * STUDENTS: Return data[index] with bounds checking
          */
         Complex& operator[](int index);
 
@@ -300,16 +267,9 @@ namespace complex_math {
         // ============ ASSIGNMENT OPERATOR (Deep Copy) ============
 
         /**
-         * @brief Assignment operator - DEEP COPY
+         * @brief Assignment operator - performs deep copy
          * @param other ComplexArray to assign from
          * @return Reference to this
-         * 
-         * STUDENTS - CRITICAL: 
-         * Must perform deep copy like copy constructor! 
-         * Also must: 
-         * 1. Check for self-assignment:  if(this == &other) return *this;
-         * 2. Delete old array: delete[] data;
-         * 3. Allocate new array and copy elements
          */
         ComplexArray& operator=(const ComplexArray& other);
 

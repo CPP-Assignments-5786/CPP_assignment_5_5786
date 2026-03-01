@@ -43,7 +43,7 @@ int main() {
     cout << "c3 (3+4i): " << c3 << endl;                       // Expected: 3+4i
     cout << "c4 (copy of c3): " << c4 << endl;                 // Expected: 3+4i
     
-    // Polar form constructor
+
     Complex c5 = Complex:: fromPolar(5.0, 0.927295);  // 5∠53.13° ≈ 3+4i
     cout << "c5 (from polar 5∠53.13°): " << c5 << endl;       // Expected: ≈3+4i
 
@@ -52,41 +52,33 @@ int main() {
     
     Complex c6(3.0, 4.0);  // 3+4i, magnitude = 5
     
-    // Convert to double (magnitude)
     double magnitude = (double)c6;
     cout << "c6 = " << c6 << endl;
     cout << "As double (magnitude): " << magnitude << endl;    // Expected: 5.0000
     
-    // Convert to float
     float magFloat = (float)c6;
     cout << "As float: " << magFloat << endl;                  // Expected: 5.0000
     
-    // Convert to int (rounded magnitude)
     int magInt = (int)c6;
     cout << "As int (rounded): " << magInt << endl;            // Expected: 5
     
-    // Convert to bool (check if non-zero)
     bool isNonZero = (bool)c6;
     Complex zero(0, 0);
     bool isZero = (bool)zero;
     cout << "c6 as bool: " << (isNonZero ? "true" : "false") << " (non-zero)" << endl;  // Expected: true
     cout << "zero as bool: " << (isZero ? "true" : "false") << " (is zero)" << endl;    // Expected: false
     
-    // Convert to string
     string str = (string)c6;
     cout << "As string: " << str << endl;                      // Expected: "3+4i"
     
-    // Using in expressions with conversion
-    double result = 10.0 + (double)c6;  // 10 + magnitude
+    double result = 10.0 + (double)c6;
     cout << "10.0 + (double)c6 = " << result << endl;          // Expected: 15.0000
     
-    // Using in if statement (bool conversion)
     Complex c7(2, 3);
     if (c7) {
         cout << "c7 is non-zero (bool conversion works! )" << endl;
     }
     
-    // String formats
     cout << "\nString representations of " << c6 << ":" << endl;
     cout << "  Rectangular: " << c6.toRectangularString() << endl;      // Expected: 3+4i
     cout << "  Polar (degrees): " << c6.toPolarString(true) << endl;    // Expected: 5∠53.13°
@@ -129,18 +121,15 @@ int main() {
     Complex quot = a / b;
     cout << "a / b = " << quot << endl;                                 // Expected: 0.6471+0.5882i
     
-    // With real numbers
     Complex c9 = a + 5.0;
     cout << "a + 5.0 = " << c9 << endl;                                 // Expected: 8+2i
     
     Complex c10 = 2.0 * a;
     cout << "2.0 * a = " << c10 << endl;                                // Expected: 6+4i
     
-    // Unary negation
     Complex neg = -a;
     cout << "-a = " << neg << endl;                                     // Expected: -3-2i
     
-    // Compound assignment
     Complex c11(5, 3);
     c11 += Complex(2, 1);
     cout << "After += (2+i): " << c11 << endl;                          // Expected: 7+4i
@@ -235,11 +224,9 @@ int main() {
     cout << "\n--- Demonstrating Shallow vs Deep Copy ---" << endl;
     cout << "Original arr1: " << arr1 << endl;
     
-    // Deep copy through copy constructor
     ComplexArray arr2(arr1);
     cout << "Created arr2 as copy of arr1: " << arr2 << endl;
     
-    // Modify arr2
     arr2[0] = Complex(99, 99);
     cout << "\nAfter modifying arr2[0] to 99+99i:" << endl;
     cout << "arr1[0]:  " << arr1[0] << " (UNCHANGED - deep copy works! )" << endl;
@@ -256,10 +243,9 @@ int main() {
     arr3.add(Complex(10, 20));
     cout << "arr3 before assignment: " << arr3 << endl;
     
-    arr3 = arr1;  // Assignment operator (deep copy)
+    arr3 = arr1;
     cout << "arr3 after arr3 = arr1: " << arr3 << endl;
     
-    // Modify arr3
     arr3[0] = Complex(88, 88);
     cout << "\nAfter modifying arr3[0]:" << endl;
     cout << "arr1[0]: " << arr1[0] << " (UNCHANGED)" << endl;
@@ -281,7 +267,7 @@ int main() {
         cout << "temp1: " << temp1 << endl;
         cout << "temp2: " << temp2 << endl;
         cout << "Exiting scope - destructors will be called..." << endl;
-    }  // Destructors delete temp1's array and temp2's array (independent!)
+    }
     
     cout << "Scope exited - both arrays properly deleted" << endl;
     cout << "No memory leaks because each array was independently allocated!" << endl;
@@ -299,7 +285,6 @@ int main() {
     cout << "arr4[1] = " << arr4[1] << endl;                            // Expected: 4+5i
     cout << "arr4[2] = " << arr4[2] << endl;                            // Expected: 6+7i
     
-    // Modify through bracket operator
     arr4[1] = Complex(10, 10);
     cout << "After arr4[1] = 10+10i:  " << arr4 << endl;
 
@@ -312,11 +297,9 @@ int main() {
     }
     cout << "arr5: " << arr5 << endl;
     
-    // Get subarray [1, 4)
     ComplexArray sub1 = arr5(1, 4);
     cout << "arr5(1, 4) [elements 1-3]: " << sub1 << endl;
     
-    // Get first 3 elements
     ComplexArray sub2 = arr5(3);
     cout << "arr5(3) [first 3]: " << sub2 << endl;
 
@@ -334,15 +317,12 @@ int main() {
     cout << "arrA: " << arrA << endl;
     cout << "arrB: " << arrB << endl;
     
-    // Element-wise addition
     ComplexArray arrSum = arrA + arrB;
     cout << "arrA + arrB: " << arrSum << endl;                          // Expected: [6+8i, 10+12i]
     
-    // Add scalar to all elements
     ComplexArray arrPlusScalar = arrA + Complex(10, 0);
     cout << "arrA + 10: " << arrPlusScalar << endl;                     // Expected: [11+2i, 13+4i]
     
-    // Multiply by scalar
     ComplexArray arrScaled = arrA * 2.0;
     cout << "arrA * 2.0: " << arrScaled << endl;                        // Expected: [2+4i, 6+8i]
 
@@ -363,7 +343,6 @@ int main() {
     // --- 18. REFERENCE & REFERENCE-RETURN ---
     cout << "\n=== 18. REFERENCE & REFERENCE-RETURN ===" << endl;
     
-    // Reference-return from bracket operator
     Complex& ref = arr4[0];
     cout << "Reference to arr4[0]: " << ref << endl;
     ref. setReal(100.0);
@@ -380,11 +359,9 @@ int main() {
     
     Complex c16(4, 3);  // |c| = 5
     
-    // Using in arithmetic expressions (converts to double)
     double calculation = (double)c16 + 10.0;
     cout << "Complex " << c16 << " magnitude + 10.0 = " << calculation << endl;  // Expected: 15.0
     
-    // Using in conditional (converts to bool)
     Complex nonZero(1, 2);
     Complex isZeroComplex(0, 0);
     
@@ -395,48 +372,8 @@ int main() {
         cout << "Complex(0,0) evaluates to false (is zero)" << endl;
     }
     
-    // Using in string concatenation
     string message = "The complex number is:  " + (string)c16;
     cout << message << endl;
-
-    // ============ FINAL SUMMARY ============
-    
-    printSeparator("FINAL SUMMARY");
-
-    cout << "\n=== All Concepts Demonstrated ===" << endl;
-    
-    cout << "\n✓ FROM ASSIGNMENTS 1-3 (Review):" << endl;
-    cout << "  • Composition (ComplexArray HAS-A Complex*)" << endl;
-    cout << "  • Reference parameters (add, etc.)" << endl;
-    cout << "  • Reference-return (operator[])" << endl;
-    cout << "  • Const methods (getSize, magnitude, etc.)" << endl;
-    cout << "  • Friend functions (distance, dotProduct)" << endl;
-    cout << "  • Function overloading (constructor, add)" << endl;
-    cout << "  • Inline/Outline (getSize vs sum)" << endl;
-    cout << "  • Static members (totalComplexCreated)" << endl;
-    cout << "  • Constructors (default, parameterized, copy)" << endl;
-    cout << "  • Destructors (delete[] data)" << endl;
-    cout << "  • Destruct-arrays (Complex* array deletion)" << endl;
-    
-    cout << "\n✓ FROM ASSIGNMENT 4 (Review):" << endl;
-    cout << "  • Arithmetic operators (+, -, *, /, +=, etc.)" << endl;
-    cout << "  • Comparison operators (==, !=, <, >)" << endl;
-    cout << "  • Bracket operator [] (by index)" << endl;
-    cout << "  • Parentheses operator () (multiple overloads)" << endl;
-    cout << "  • Suffix operators (++, --)" << endl;
-    cout << "  • Stream operators (<<, >>)" << endl;
-    
-    cout << "\n★ NEW IN ASSIGNMENT 5:" << endl;
-    cout << "  ★ DEEP COPY CONSTRUCTOR - proper array copying" << endl;
-    cout << "     - ComplexArray copy constructor" << endl;
-    cout << "     - Assignment operator with deep copy" << endl;
-    cout << "     - Independent memory allocation" << endl;
-    cout << "  ★ CONVERSION OPERATORS - Complex to other types" << endl;
-    cout << "     - operator double() - magnitude" << endl;
-    cout << "     - operator float() - magnitude as float" << endl;
-    cout << "     - operator int() - rounded magnitude" << endl;
-    cout << "     - operator bool() - check if non-zero" << endl;
-    cout << "     - operator string() - string representation" << endl;
     
     cout << "\n=== Statistics ===" << endl;
     cout << "Total Complex numbers created: " << Complex::getTotalComplexCreated() << endl;
@@ -448,4 +385,3 @@ int main() {
     
     return 0;
 }
-// All destructors called here - proper cleanup of all dynamic arrays! 
