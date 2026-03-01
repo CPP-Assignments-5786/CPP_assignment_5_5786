@@ -1,7 +1,5 @@
-#! make -f
-
 CXX=g++
-CXXFLAGS=-std=c++17 -Werror -Wsign-conversion -Wall -Wextra
+CXXFLAGS=-std=c++23 -Werror -Wsign-conversion -Wall -Wextra
 SOURCES=Complex.cpp ComplexArray.cpp
 OBJECTS=$(subst .cpp,.o,$(SOURCES))
 
