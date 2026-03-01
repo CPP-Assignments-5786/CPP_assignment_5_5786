@@ -18,16 +18,16 @@ test: TestRunner.o $(OBJECTS)
 TestRunner.o: test.cpp Complex.hpp ComplexArray.hpp doctest.h
 	$(CXX) $(CXXFLAGS) --compile test.cpp -o TestRunner.o
 
-%. o: %.cpp
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
-Complex.o: Complex.cpp Complex. hpp
+Complex.o: Complex.cpp Complex.hpp
 
 ComplexArray.o: ComplexArray.cpp ComplexArray.hpp Complex.hpp
 
-main.o: main.cpp Complex. hpp ComplexArray.hpp
+main.o: main.cpp Complex.hpp ComplexArray.hpp
 
 clean:
-	rm -f *. o demo test
+	rm -f *.o demo test
 
 .PHONY: all demo test clean

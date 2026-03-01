@@ -517,7 +517,7 @@ TEST_CASE("Integration - Conversion in Expressions") {
     Complex c(3, 4);
     
     // Use in arithmetic
-    double result = (double)c + 10. 0;
+    double result = (double)c + 10.0;
     CHECK(result == doctest::Approx(15.0));
     
     // Use in conditional

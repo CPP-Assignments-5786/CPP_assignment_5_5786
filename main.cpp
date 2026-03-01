@@ -1,25 +1,6 @@
 /**
  * @file main.cpp
  * @brief Demo for Complex Number System
- * 
- * This demo showcases ALL C++ concepts from assignments 1-5:
- * 
- * ASSIGNMENTS 1-4 CONCEPTS (Review):
- * 1. Composition
- * 2. Reference & Reference-return
- * 3. Const-methods
- * 4. Friend-functions
- * 5. Function overloading
- * 6. Inline-outline
- * 7. Static members
- * 8. Constructors
- * 9. Destructors
- * 10. Destruct-arrays
- * 11. Operator overloading (arithmetic, comparison, bracket, parentheses, suffix)
- * 
- * ASSIGNMENT 5 CONCEPTS (NEW/EMPHASIZED):
- * 12.  DEEP COPY CONSTRUCTOR - proper copying of dynamic arrays
- * 13. CONVERSION OPERATORS - Complex to double/string/bool/int
  */
 
 #include <iostream>
@@ -96,7 +77,7 @@ int main() {
     cout << "As string: " << str << endl;                      // Expected: "3+4i"
     
     // Using in expressions with conversion
-    double result = 10. 0 + (double)c6;  // 10 + magnitude
+    double result = 10.0 + (double)c6;  // 10 + magnitude
     cout << "10.0 + (double)c6 = " << result << endl;          // Expected: 15.0000
     
     // Using in if statement (bool conversion)

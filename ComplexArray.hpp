@@ -78,24 +78,8 @@ namespace complex_math {
         ComplexArray(const Complex* values, int count);
 
         /**
-         * @brief DEEP COPY CONSTRUCTOR (CRITICAL!)
+         * @brief DEEP COPY CONSTRUCTOR
          * @param other ComplexArray to copy from
-         * 
-         * STUDENTS - THIS IS THE FOCUS OF ASSIGNMENT 5:
-         * You MUST perform DEEP COPY: 
-         * 1. Allocate NEW array: 
-         *    this->data = new Complex[other. capacity];
-         * 2. Copy each element individually:
-         *    for(int i = 0; i < other.size; i++)
-         *        this->data[i] = other.data[i];
-         * 3. Copy all member variables
-         * 
-         * WHY DEEP COPY IS NEEDED:
-         * - If you only copy the pointer (shallow copy), both objects
-         *   would point to the SAME array
-         * - When one object is destroyed, it would delete the array
-         * - The other object would have a dangling pointer! 
-         * - Modifying one would affect the other
          */
         ComplexArray(const ComplexArray& other);
 
@@ -343,7 +327,7 @@ namespace complex_math {
          * @param other Array to compare
          * @return true if any element differs
          */
-        bool operator! =(const ComplexArray& other) const;
+        bool operator!=(const ComplexArray& other) const;
 
         // ============ STREAM OPERATORS ============
 

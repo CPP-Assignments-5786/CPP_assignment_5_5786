@@ -212,7 +212,7 @@ namespace complex_math {
          * @param degrees If true, use degrees; otherwise radians
          * @return String in polar form
          */
-        std:: string toPolarString(bool degrees = true) const;
+        std::string toPolarString(bool degrees = true) const;
 
         // ============ ARITHMETIC OPERATORS ============
 
