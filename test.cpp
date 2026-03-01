@@ -52,6 +52,12 @@ TEST_CASE("Complex - Conversion Operators (Assignment 5 - NEW!)") {
         CHECK(i == 5);
     }
     
+    SUBCASE("Convert to int - non-integer magnitude rounds") {
+        Complex c2(2.0, 3.0);  // |c2| = sqrt(13) ≈ 3.606
+        int i = (int)c2;
+        CHECK(i == 4);  // std::round(3.606) = 4
+    }
+    
     SUBCASE("Convert to bool - non-zero") {
         bool b = (bool)c;
         CHECK(b == true);
@@ -136,6 +142,11 @@ TEST_CASE("Complex - Arithmetic Operators") {
         // (3+2i)/(1+4i) = (3+2i)(1-4i) / (1+16) = (3-12i+2i+8) / 17 = (11-10i)/17
         CHECK(quot.getReal() == doctest::Approx(11.0/17.0).epsilon(0.001));
         CHECK(quot.getImag() == doctest::Approx(-10.0/17.0).epsilon(0.001));
+    }
+    
+    SUBCASE("Division by zero throws") {
+        Complex zero(0, 0);
+        CHECK_THROWS_AS(a / zero, std::invalid_argument);
     }
     
     SUBCASE("Unary negation") {

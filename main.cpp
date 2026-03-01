@@ -119,7 +119,7 @@ int main() {
     cout << "a * b = " << prod << endl;                                 // Expected: -5+14i
     
     Complex quot = a / b;
-    cout << "a / b = " << quot << endl;                                 // Expected: 0.6471+0.5882i
+    cout << "a / b = " << quot << endl;                                 // Expected: 0.6471-0.5882i
     
     Complex c9 = a + 5.0;
     cout << "a + 5.0 = " << c9 << endl;                                 // Expected: 8+2i

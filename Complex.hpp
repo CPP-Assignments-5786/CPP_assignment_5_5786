@@ -180,7 +180,7 @@ namespace complex_math {
         operator std::string() const;
 
         /**
-         * @brief Convert to int (returns rounded magnitude)
+         * @brief Convert to int (returns magnitude rounded to nearest integer using std::round)
          * @return Magnitude as integer
          */
         operator int() const;
