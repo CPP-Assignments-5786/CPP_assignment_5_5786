@@ -20,11 +20,11 @@
 
 ## מבנה המטלה
 
-במטלה זו תתבקשו להשלים קוד חסר בקבצי המימוש (`.cpp`) עבור המחלקות `Complex` ו-`ComplexArray`, על בסיס קבצי ה-header שסופקו.
+במטלה זו תתבקשו **ליצור ולממש** את קבצי המימוש `Complex.cpp` ו-`ComplexArray.cpp` עבור המחלקות `Complex` ו-`ComplexArray`, על בסיס קבצי ה-header שסופקו.
 
 ## דרישות והנחיות
 
-- להשלים את הקוד החסר בקבצי `Complex.cpp` ו-`ComplexArray.cpp`
+- ליצור ולממש את `Complex.cpp` ו-`ComplexArray.cpp` על בסיס קבצי ה-header
 - לוודא שהקוד מתקמפל ופועל ללא שגיאות
 - לממש **deep copy** נכון:
   - Copy constructor

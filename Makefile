@@ -28,4 +28,4 @@ main.o: main.cpp Complex.hpp ComplexArray.hpp
 clean:
 	rm -f *.o demo test
 
-.PHONY: all demo test clean
+.PHONY: all test clean
