@@ -56,12 +56,6 @@ int main() {
     cout << "c6 = " << c6 << endl;
     cout << "As double (magnitude): " << magnitude << endl;    // Expected: 5.0000
     
-    float magFloat = (float)c6;
-    cout << "As float: " << magFloat << endl;                  // Expected: 5.0000
-    
-    int magInt = (int)c6;
-    cout << "As int (rounded): " << magInt << endl;            // Expected: 5
-    
     bool isNonZero = (bool)c6;
     Complex zero(0, 0);
     bool isZero = (bool)zero;
@@ -81,8 +75,6 @@ int main() {
     
     cout << "\nString representations of " << c6 << ":" << endl;
     cout << "  Rectangular: " << c6.toRectangularString() << endl;      // Expected: 3+4i
-    cout << "  Polar (degrees): " << c6.toPolarString(true) << endl;    // Expected: 5∠53.13°
-    cout << "  Polar (radians): " << c6.toPolarString(false) << endl;   // Expected: 5∠0.9273
 
     // --- 3. COMPLEX PROPERTIES ---
     cout << "\n=== 3. COMPLEX NUMBER PROPERTIES ===" << endl;
@@ -90,11 +82,9 @@ int main() {
     Complex c8(3, 4);
     cout << "c8 = " << c8 << endl;
     cout << "Magnitude: " << c8.magnitude() << endl;                    // Expected: 5.0000
-    cout << "Phase (radians): " << c8.phase() << endl;                  // Expected: 0.9273
     cout << "Conjugate: " << c8.conjugate() << endl;                    // Expected: 3-4i
     cout << "Is zero?  " << (c8.isZero() ? "Yes" : "No") << endl;        // Expected: No
     cout << "Is real? " << (c8.isReal() ? "Yes" : "No") << endl;        // Expected: No
-    cout << "Is imaginary? " << (c8.isImaginary() ? "Yes" : "No") << endl; // Expected: No
     
     Complex real(5, 0);
     cout << "\nreal = " << real << endl;
@@ -124,8 +114,8 @@ int main() {
     Complex c9 = a + 5.0;
     cout << "a + 5.0 = " << c9 << endl;                                 // Expected: 8+2i
     
-    Complex c10 = 2.0 * a;
-    cout << "2.0 * a = " << c10 << endl;                                // Expected: 6+4i
+    Complex c10 = a * 2.0;
+    cout << "a * 2.0 = " << c10 << endl;                                // Expected: 6+4i
     
     Complex neg = -a;
     cout << "-a = " << neg << endl;                                     // Expected: -3-2i
@@ -137,23 +127,20 @@ int main() {
     c11 *= 2.0;
     cout << "After *= 2.0: " << c11 << endl;                            // Expected: 14+8i
 
-    // --- 5. INCREMENT/DECREMENT (Suffix) ---
-    cout << "\n=== 5. INCREMENT/DECREMENT OPERATORS ===" << endl;
+    // --- 5. INCREMENT/DECREMENT (Prefix) ---
+    cout << "\n=== 5. PREFIX INCREMENT/DECREMENT OPERATORS ===" << endl;
     
     Complex c12(3, 4);
     cout << "c12 initial: " << c12 << endl;                             // Expected: 3+4i
     
-    Complex c13 = c12++;
-    cout << "After c12++: c12 = " << c12 << ", returned = " << c13 << endl;
-    // Expected: c12 = 4+4i, returned = 3+4i
+    ++c12;
+    cout << "After ++c12: c12 = " << c12 << endl;                        // Expected: 4+4i
     
-    Complex c14 = ++c12;
-    cout << "After ++c12: c12 = " << c12 << ", returned = " << c14 << endl;
-    // Expected: c12 = 5+4i, returned = 5+4i
+    ++c12;
+    cout << "After ++c12: c12 = " << c12 << endl;                        // Expected: 5+4i
     
-    Complex c15 = c12--;
-    cout << "After c12--: c12 = " << c12 << ", returned = " << c15 << endl;
-    // Expected: c12 = 4+4i, returned = 5+4i
+    --c12;
+    cout << "After --c12: c12 = " << c12 << endl;                        // Expected: 4+4i
 
     // --- 6. COMPARISON OPERATORS ---
     cout << "\n=== 6. COMPARISON OPERATORS ===" << endl;
@@ -171,20 +158,14 @@ int main() {
     cout << "x > z: " << (x > z ?  "true" : "false") << " (by magnitude)" << endl;        // Expected: true
     cout << "z < x: " << (z < x ? "true" : "false") << " (by magnitude)" << endl;        // Expected: true
 
-    // --- 7. FRIEND FUNCTIONS ---
-    cout << "\n=== 7. FRIEND FUNCTIONS ===" << endl;
+    // --- 7. FRIEND FUNCTION ---
+    cout << "\n=== 7. FRIEND FUNCTION ===" << endl;
     
     Complex p(3, 4);
     Complex q(6, 8);
     
     double dist = distance(p, q);
     cout << "Distance between " << p << " and " << q << ": " << dist << endl;  // Expected: 5.0000
-    
-    bool sameMag = sameMagnitude(p, q);
-    cout << "Same magnitude?  " << (sameMag ? "Yes" : "No") << endl;     // Expected: No
-    
-    double dot = dotProduct(p, q);
-    cout << "Dot product: " << dot << endl;                             // Expected: 50.0000
 
     // --- 8. CONST METHODS ---
     cout << "\n=== 8. CONST METHODS ===" << endl;
@@ -201,7 +182,6 @@ int main() {
     
     cout << "Total complex numbers created: " << Complex::getTotalComplexCreated() << endl;
     cout << "Current complex numbers in memory: " << Complex::getCurrentComplexCount() << endl;
-    cout << "Epsilon for comparison: " << Complex::getEpsilon() << endl;
 
     // ============ PART 2: COMPLEXARRAY CLASS ============
     
@@ -288,23 +268,8 @@ int main() {
     arr4[1] = Complex(10, 10);
     cout << "After arr4[1] = 10+10i:  " << arr4 << endl;
 
-    // --- 15. PARENTHESES OPERATOR () ---
-    cout << "\n=== 15. PARENTHESES OPERATOR () ===" << endl;
-    
-    ComplexArray arr5;
-    for (int i = 0; i < 5; i++) {
-        arr5.add(Complex(i, i*2));
-    }
-    cout << "arr5: " << arr5 << endl;
-    
-    ComplexArray sub1 = arr5(1, 4);
-    cout << "arr5(1, 4) [elements 1-3]: " << sub1 << endl;
-    
-    ComplexArray sub2 = arr5(3);
-    cout << "arr5(3) [first 3]: " << sub2 << endl;
-
-    // --- 16. ARITHMETIC OPERATORS ON ARRAYS ---
-    cout << "\n=== 16. ARITHMETIC OPERATORS (on Arrays) ===" << endl;
+    // --- 15. ARITHMETIC OPERATORS ON ARRAYS ---
+    cout << "\n=== 15. ARITHMETIC OPERATORS (on Arrays) ===" << endl;
     
     ComplexArray arrA;
     arrA.add(Complex(1, 2));
@@ -326,8 +291,8 @@ int main() {
     ComplexArray arrScaled = arrA * 2.0;
     cout << "arrA * 2.0: " << arrScaled << endl;                        // Expected: [2+4i, 6+8i]
 
-    // --- 17. MATHEMATICAL OPERATIONS ---
-    cout << "\n=== 17. MATHEMATICAL OPERATIONS ===" << endl;
+    // --- 16. MATHEMATICAL OPERATIONS ---
+    cout << "\n=== 16. MATHEMATICAL OPERATIONS ===" << endl;
     
     ComplexArray arr6;
     arr6.add(Complex(1, 0));
@@ -338,24 +303,23 @@ int main() {
     cout << "Sum: " << arr6.sum() << endl;                              // Expected: 6+0i
     cout << "Average: " << arr6.average() << endl;                      // Expected:  2+0i
     cout << "Max (by magnitude): " << arr6.max() << endl;               // Expected:  3+0i
-    cout << "Min (by magnitude): " << arr6.min() << endl;               // Expected: 1+0i
 
-    // --- 18. REFERENCE & REFERENCE-RETURN ---
-    cout << "\n=== 18. REFERENCE & REFERENCE-RETURN ===" << endl;
+    // --- 17. REFERENCE & REFERENCE-RETURN ---
+    cout << "\n=== 17. REFERENCE & REFERENCE-RETURN ===" << endl;
     
     Complex& ref = arr4[0];
     cout << "Reference to arr4[0]: " << ref << endl;
     ref. setReal(100.0);
     cout << "After modifying through reference: " << arr4[0] << endl;   // Expected: 100+3i
 
-    // --- 19. INLINE vs OUTLINE ---
-    cout << "\n=== 19. INLINE vs OUTLINE ===" << endl;
+    // --- 18. INLINE vs OUTLINE ---
+    cout << "\n=== 18. INLINE vs OUTLINE ===" << endl;
     cout << "getSize() is INLINE: " << arr4.getSize() << endl;
     cout << "sum() is OUTLINE: " << arr4.sum() << endl;
     cout << "isEmpty() is INLINE: " << (arr4.isEmpty() ? "Yes" : "No") << endl;
 
-    // --- 20. CONVERSION IN CONTEXT ---
-    cout << "\n=== 20. CONVERSION OPERATORS IN CONTEXT ===" << endl;
+    // --- 19. CONVERSION OPERATORS IN CONTEXT ---
+    cout << "\n=== 19. CONVERSION OPERATORS IN CONTEXT ===" << endl;
     
     Complex c16(4, 3);  // |c| = 5
     

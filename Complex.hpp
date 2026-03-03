@@ -4,9 +4,8 @@
  *
  * Complex numbers can be represented as:
  * - Rectangular form: a + bi
- * - Polar form: r∠θ or r*e^(iθ)
- * - String: "a+bi"
  * - Magnitude: |z| = √(a² + b²)
+ * - String: "a+bi"
  */
 
 #ifndef COMPLEX_HPP
@@ -30,7 +29,6 @@ namespace complex_math {
         // Static members
         static int totalComplexCreated;
         static int currentComplexCount;
-        static double epsilon;  // For floating-point comparison
 
     public:
         // ============ Constructors & Destructor ============
@@ -109,12 +107,6 @@ namespace complex_math {
         double magnitude() const;
 
         /**
-         * @brief Calculate phase (argument) θ = atan2(b, a)
-         * @return Phase in radians
-         */
-        double phase() const;
-
-        /**
          * @brief Get complex conjugate:  if z = a+bi, then z* = a-bi
          * @return Conjugate complex number
          */
@@ -132,73 +124,50 @@ namespace complex_math {
          */
         bool isReal() const;
 
-        /**
-         * @brief Check if complex number is imaginary (real ≈ 0)
-         * @return true if real part is near zero
-         */
-        bool isImaginary() const;
-
         // ============ Static Methods ============
 
         static int getTotalComplexCreated();
         static int getCurrentComplexCount();
-        static void setEpsilon(double eps);
-        static double getEpsilon();
 
         /**
          * @brief Create complex number from polar form
+         * Uses: a = r * cos(θ),  b = r * sin(θ)
          * @param magnitude Magnitude r
          * @param phase Phase θ in radians
          * @return Complex number in rectangular form
          */
         static Complex fromPolar(double magnitude, double phase);
 
-        // ============ CONVERSION OPERATORS (NEW - Assignment 5) ============
+        // ============ CONVERSION OPERATORS (Assignment 5 Focus) ============
 
         /**
          * @brief Convert to double (returns magnitude)
+         * Use explicit cast: double d = (double)c;
          * @return Magnitude of complex number
          */
-        operator double() const;
-
-        /**
-         * @brief Convert to float (returns magnitude)
-         * @return Magnitude as float
-         */
-        operator float() const;
+        explicit operator double() const;
 
         /**
          * @brief Convert to bool (check if non-zero)
+         * Works implicitly in boolean contexts: if (c) { ... }
          * @return true if complex number is not zero
          */
-        operator bool() const;
+        explicit operator bool() const;
 
         /**
          * @brief Convert to string in rectangular form "a+bi"
+         * Use explicit cast: std::string s = (std::string)c;
          * @return String representation
          */
-        operator std::string() const;
-
-        /**
-         * @brief Convert to int (returns magnitude rounded to nearest integer using std::round)
-         * @return Magnitude as integer
-         */
-        operator int() const;
+        explicit operator std::string() const;
 
         // ============ String Representations ============
 
         /**
-         * @brief Get string in rectangular form "a+bi"
-         * @return String in format "a+bi"
+         * @brief Get string in rectangular form "a+bi" or "a-bi"
+         * @return String in rectangular form
          */
         std::string toRectangularString() const;
-
-        /**
-         * @brief Get string in polar form "r∠θ" or "r(cos θ + i sin θ)"
-         * @param degrees If true, use degrees; otherwise radians
-         * @return String in polar form
-         */
-        std::string toPolarString(bool degrees = true) const;
 
         // ============ ARITHMETIC OPERATORS ============
 
@@ -211,10 +180,10 @@ namespace complex_math {
 
         /**
          * @brief Add real number
-         * @param real Real number to add
+         * @param val Real number to add
          * @return Sum
          */
-        Complex operator+(double real) const;
+        Complex operator+(double val) const;
 
         /**
          * @brief Subtraction: (a+bi) - (c+di) = (a-c) + (b-d)i
@@ -222,13 +191,6 @@ namespace complex_math {
          * @return Difference
          */
         Complex operator-(const Complex& other) const;
-
-        /**
-         * @brief Subtract real number
-         * @param real Real number to subtract
-         * @return Difference
-         */
-        Complex operator-(double real) const;
 
         /**
          * @brief Multiplication:  (a+bi) * (c+di) = (ac-bd) + (ad+bc)i
@@ -239,10 +201,10 @@ namespace complex_math {
 
         /**
          * @brief Multiply by real number
-         * @param real Real number to multiply
+         * @param val Real number to multiply
          * @return Product
          */
-        Complex operator*(double real) const;
+        Complex operator*(double val) const;
 
         /**
          * @brief Division: (a+bi) / (c+di) = [(ac+bd) + (bc-ad)i] / (c²+d²)
@@ -253,13 +215,6 @@ namespace complex_math {
         Complex operator/(const Complex& other) const;
 
         /**
-         * @brief Divide by real number
-         * @param real Real number to divide by
-         * @return Quotient
-         */
-        Complex operator/(double real) const;
-
-        /**
          * @brief Unary negation: -(a+bi) = -a-bi
          * @return Negated complex number
          */
@@ -268,41 +223,24 @@ namespace complex_math {
         // ============ COMPOUND ASSIGNMENT OPERATORS ============
 
         Complex& operator+=(const Complex& other);
-        Complex& operator+=(double real);
+        Complex& operator+=(double val);
         Complex& operator-=(const Complex& other);
-        Complex& operator-=(double real);
         Complex& operator*=(const Complex& other);
-        Complex& operator*=(double real);
-        Complex& operator/=(const Complex& other);
-        Complex& operator/=(double real);
+        Complex& operator*=(double val);
 
-        // ============ INCREMENT/DECREMENT (Suffix) OPERATORS ============
+        // ============ INCREMENT/DECREMENT (Prefix) OPERATORS ============
 
         /**
-         * @brief Prefix increment (++z) - increments real part
-         * @return Reference to this
+         * @brief Prefix increment (++z) - increments real part by 1
+         * @return Reference to this (after increment)
          */
         Complex& operator++();
 
         /**
-         * @brief Postfix increment (z++) - increments real part
-         * @param dummy Dummy parameter
-         * @return Copy before increment
-         */
-        Complex operator++(int dummy);
-
-        /**
-         * @brief Prefix decrement (--z) - decrements real part
-         * @return Reference to this
+         * @brief Prefix decrement (--z) - decrements real part by 1
+         * @return Reference to this (after decrement)
          */
         Complex& operator--();
-
-        /**
-         * @brief Postfix decrement (z--) - decrements real part
-         * @param dummy Dummy parameter
-         * @return Copy before decrement
-         */
-        Complex operator--(int dummy);
 
         // ============ COMPARISON OPERATORS ============
 
@@ -334,30 +272,17 @@ namespace complex_math {
          */
         bool operator>(const Complex& other) const;
 
-        /**
-         * @brief Less than or equal (compares magnitudes)
-         * @param other Complex number to compare
-         * @return true if |this| <= |other|
-         */
-        bool operator<=(const Complex& other) const;
-
-        /**
-         * @brief Greater than or equal (compares magnitudes)
-         * @param other Complex number to compare
-         * @return true if |this| >= |other|
-         */
-        bool operator>=(const Complex& other) const;
-
         // ============ ASSIGNMENT OPERATOR ============
 
         /**
          * @brief Assignment operator
+         * Tip: check for self-assignment first!
          * @param other Complex number to assign from
          * @return Reference to this
          */
         Complex& operator=(const Complex& other);
 
-        // ============ STREAM OPERATORS ============
+        // ============ STREAM OPERATOR ============
 
         /**
          * @brief Output stream operator
@@ -368,74 +293,26 @@ namespace complex_math {
          */
         friend std::ostream& operator<<(std::ostream& os, const Complex& c);
 
-        /**
-         * @brief Input stream operator
-         * Expected format: "a+bi" or "a-bi" or just "a"
-         * @param is Input stream
-         * @param c Complex number to input into
-         * @return Reference to input stream
-         */
-        friend std::istream& operator>>(std::istream& is, Complex& c);
-
-        // ============ NON-MEMBER ARITHMETIC OPERATORS ============
+        // ============ NON-MEMBER ARITHMETIC OPERATOR ============
 
         /**
-         * @brief Add real number to complex (reverse order)
-         * @param real Real number
+         * @brief Add real number to complex (reverse order): val + c
+         * @param val Real number
          * @param c Complex number
          * @return Sum
          */
-        friend Complex operator+(double real, const Complex& c);
+        friend Complex operator+(double val, const Complex& c);
 
-        /**
-         * @brief Subtract complex from real number
-         * @param real Real number
-         * @param c Complex number
-         * @return Difference
-         */
-        friend Complex operator-(double real, const Complex& c);
-
-        /**
-         * @brief Multiply real number by complex (reverse order)
-         * @param real Real number
-         * @param c Complex number
-         * @return Product
-         */
-        friend Complex operator*(double real, const Complex& c);
-
-        /**
-         * @brief Divide real number by complex
-         * @param real Real number
-         * @param c Complex number
-         * @return Quotient
-         */
-        friend Complex operator/(double real, const Complex& c);
-
-        // ============ FRIEND FUNCTIONS ============
+        // ============ FRIEND FUNCTION ============
 
         /**
          * @brief Calculate distance between two complex numbers
+         * distance = |c1 - c2| = √((a1-a2)² + (b1-b2)²)
          * @param c1 First complex number
          * @param c2 Second complex number
-         * @return Distance |c1 - c2|
+         * @return Distance
          */
         friend double distance(const Complex& c1, const Complex& c2);
-
-        /**
-         * @brief Check if two complex numbers have same magnitude
-         * @param c1 First complex number
-         * @param c2 Second complex number
-         * @return true if |c1| ≈ |c2|
-         */
-        friend bool sameMagnitude(const Complex& c1, const Complex& c2);
-
-        /**
-         * @brief Calculate dot product (treating as 2D vectors)
-         * @param c1 First complex number
-         * @param c2 Second complex number
-         * @return Dot product:  a1*a2 + b1*b2
-         */
-        friend double dotProduct(const Complex& c1, const Complex& c2);
     };
 
 } // namespace complex_math

@@ -48,13 +48,6 @@ namespace complex_math {
         ComplexArray(int initialCapacity);
 
         /**
-         * @brief Constructor with initial values
-         * @param values Array of complex numbers
-         * @param count Number of elements
-         */
-        ComplexArray(const Complex* values, int count);
-
-        /**
          * @brief DEEP COPY CONSTRUCTOR
          * @param other ComplexArray to copy from
          */
@@ -105,14 +98,6 @@ namespace complex_math {
         void add(const Complex& value);
 
         /**
-         * @brief Insert element at index
-         * @param index Index to insert at
-         * @param value Complex number to insert
-         * @return true if successful
-         */
-        bool insert(int index, const Complex& value);
-
-        /**
          * @brief Remove element at index
          * @param index Index to remove
          * @return true if successful
@@ -158,18 +143,6 @@ namespace complex_math {
          */
         Complex max() const;
 
-        /**
-         * @brief Find element with minimum magnitude
-         * @return Complex number with min magnitude
-         */
-        Complex min() const;
-
-        /**
-         * @brief Calculate magnitude of all elements as vector
-         * @return Magnitude
-         */
-        double vectorMagnitude() const;
-
         // ============ BRACKET OPERATOR [] ============
 
         /**
@@ -188,23 +161,6 @@ namespace complex_math {
          */
         const Complex& operator[](int index) const;
 
-        // ============ PARENTHESES OPERATOR () ============
-
-        /**
-         * @brief Get subarray [start, end)
-         * @param start Start index (inclusive)
-         * @param end End index (exclusive)
-         * @return New ComplexArray with subarray
-         */
-        ComplexArray operator()(int start, int end) const;
-
-        /**
-         * @brief Get first n elements
-         * @param n Number of elements
-         * @return New ComplexArray with first n elements
-         */
-        ComplexArray operator()(int n) const;
-
         // ============ ARITHMETIC OPERATORS ============
 
         /**
@@ -222,20 +178,6 @@ namespace complex_math {
         ComplexArray operator+(const ComplexArray& other) const;
 
         /**
-         * @brief Subtract scalar from all elements
-         * @param value Complex number to subtract
-         * @return New array with modified elements
-         */
-        ComplexArray operator-(const Complex& value) const;
-
-        /**
-         * @brief Element-wise subtraction
-         * @param other Array to subtract
-         * @return New array with differences
-         */
-        ComplexArray operator-(const ComplexArray& other) const;
-
-        /**
          * @brief Multiply all elements by scalar
          * @param value Complex number to multiply
          * @return New array with products
@@ -249,25 +191,17 @@ namespace complex_math {
          */
         ComplexArray operator*(double scalar) const;
 
-        /**
-         * @brief Divide all elements by scalar
-         * @param value Complex number to divide by
-         * @return New array with quotients
-         */
-        ComplexArray operator/(const Complex& value) const;
-
         // ============ COMPOUND ASSIGNMENT OPERATORS ============
 
         ComplexArray& operator+=(const Complex& value);
         ComplexArray& operator+=(const ComplexArray& other);
-        ComplexArray& operator-=(const Complex& value);
-        ComplexArray& operator*=(const Complex& value);
         ComplexArray& operator*=(double scalar);
 
         // ============ ASSIGNMENT OPERATOR (Deep Copy) ============
 
         /**
          * @brief Assignment operator - performs deep copy
+         * Tip: check for self-assignment first!
          * @param other ComplexArray to assign from
          * @return Reference to this
          */
@@ -289,7 +223,7 @@ namespace complex_math {
          */
         bool operator!=(const ComplexArray& other) const;
 
-        // ============ STREAM OPERATORS ============
+        // ============ STREAM OPERATOR ============
 
         /**
          * @brief Output stream operator
@@ -300,44 +234,7 @@ namespace complex_math {
          */
         friend std::ostream& operator<<(std::ostream& os, const ComplexArray& arr);
 
-        /**
-         * @brief Input stream operator
-         * @param is Input stream
-         * @param arr Array to input into
-         * @return Reference to input stream
-         */
-        friend std::istream& operator>>(std::istream& is, ComplexArray& arr);
-
-        // ============ FRIEND FUNCTIONS ============
-
-        /**
-         * @brief Calculate dot product of two arrays (as vectors)
-         * @param arr1 First array
-         * @param arr2 Second array
-         * @return Dot product
-         */
-        friend Complex dotProduct(const ComplexArray& arr1, const ComplexArray& arr2);
-
-        /**
-         * @brief Check if arrays have same size
-         * @param arr1 First array
-         * @param arr2 Second array
-         * @return true if same size
-         */
-        friend bool sameSize(const ComplexArray& arr1, const ComplexArray& arr2);
-
-        // ============ Utility Methods ============
-
-        /**
-         * @brief Print array to output stream
-         * @param os Output stream (default: std::cout)
-         */
-        void print(std::ostream& os = std::cout) const;
-
-        /**
-         * @brief Reverse the array in-place
-         */
-        void reverse();
+        // ============ Utility Method ============
 
         /**
          * @brief Sort by magnitude (ascending)

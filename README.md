@@ -12,10 +12,15 @@
 מטלה זו היא חלק מהקורס "C++ תכנות מתקדם" ומטרתה להדגים שני נושאים מרכזיים:
 
 1. **העתקה עמוקה (Deep Copy)** — בעיקר במחלקות שמחזיקות זיכרון דינמי (`new[]`).
-2. **אופרטורי המרה (Conversion Operators)** — המרות בין טיפוסים, למשל המרת מספר מרוכב ל-`double` (גודל), `string` (ייצוג טקסטואלי), `bool` (אפס/לא אפס), ועוד.
+2. **אופרטורי המרה מפורשים (Explicit Conversion Operators)** — המרות בין טיפוסים באמצעות קאסט מפורש, למשל המרת מספר מרוכב ל-`double` (גודל), `std::string` (ייצוג טקסטואלי), `bool` (אפס/לא אפס).
 
-התרגיל מתבסס על מערכת של מספרים מרוכבים:
-- `Complex` — מספר מרוכב ותמיכה באופרטורים רבים + conversion operators
+**חשוב**: אופרטורי ההמרה מוגדרים כ-`explicit` כדי למנוע ביצוע אוטומטי ודו משמעות:
+- `double d = (double)c;` — עובד (קאסט מפורש)
+- `double d = c;` — **לא עובד** (מנע חדות)
+- `if (c) { ... }` — עובד בהקשר בוליאני (exclusive)
+
+התרגיל מתבסס על מערכת מספרים מרוכבים:
+- `Complex` — מספר מרוכב ותמיכה באופרטורים רבים + אופרטורי המרה מפורשים
 - `ComplexArray` — מערך דינמי של `Complex` המדגים deep copy בצורה קריטית
 
 ## מבנה המטלה
@@ -35,12 +40,11 @@
 ## תכונות C++ שיש להדגים
 
 1. **Deep Copy** במחלקה שמחזיקה `Complex* data`
-2. **Conversion Operators** במחלקה `Complex`:
-   - `operator double()` (למשל: magnitude)
-   - `operator std::string()`
-   - `operator bool()`
-   - `operator int()` (למשל: גודל מעוגל)
-3. **Operator Overloading** (מהמטלה הקודמת): אופרטורים אריתמטיים, השוואה, זרמים, ++/--
+2. **Explicit Conversion Operators** במחלקה `Complex`:
+   - `explicit operator double()`
+   - `explicit operator bool()` 
+   - `explicit operator std::string()`
+3. **Operator Overloading**: אופרטורים אריתמטיים, השוואה, זרמים, `++`/`--`
 4. **Composition**: `ComplexArray` מכילה מערך של `Complex`
 5. **ניהול זיכרון דינמי**: `new[]` / `delete[]`
 6. **בדיקות יחידה**: doctest
