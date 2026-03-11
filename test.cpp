@@ -1,16 +1,13 @@
 /**
  * @file test.cpp
  * @brief Unit tests for Complex Number System using doctest
- * 
- * Special focus on:
- * - Deep copy constructor testing
- * - Conversion operator testing
  */
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "Complex.hpp"
 #include "ComplexArray.hpp"
+#include <fstream>
 
 using namespace complex_math;
 
@@ -34,7 +31,7 @@ TEST_CASE("Complex - Constructors") {
     CHECK(c4.getImag() == 4.0);
 }
 
-TEST_CASE("Complex - Conversion Operators (Assignment 5 - NEW!)") {
+TEST_CASE("Complex - Conversion Operators") {
     Complex c(3.0, 4.0);  // |c| = 5
     
     SUBCASE("Convert to double (magnitude)") {
@@ -220,7 +217,7 @@ TEST_CASE("ComplexArray - Add Elements (Composition)") {
     CHECK_FALSE(arr.isEmpty());
 }
 
-TEST_CASE("ComplexArray - Deep Copy Constructor (Assignment 5 - CRITICAL!)") {
+TEST_CASE("ComplexArray - Deep Copy Constructor") {
     ComplexArray arr1;
     arr1.add(Complex(1, 2));
     arr1.add(Complex(3, 4));
@@ -464,4 +461,11 @@ TEST_CASE("Integration - Conversion in Expressions") {
     // Convert to string
     std::string s = (std::string)c;
     CHECK(s == "3+4i");
+}
+
+// ==================== STUDENT TEST FILE CHECK ====================
+
+TEST_CASE("StudentTest - File exists") {
+    std::ifstream f("StudentTest.cpp");
+    CHECK_MESSAGE(f.good(), "StudentTest.cpp not found. You must create StudentTest.cpp with at least 20 test cases.");
 }

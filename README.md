@@ -1,87 +1,57 @@
-# מטלה חמישית - העתקה עמוקה (Deep Copy) ואופרטורי המרה (Conversion Operators)
+# Assignment 5 — Deep Copy and Conversion Operators
 
-## יושרה אקדמית
+## Academic Integrity
 
-במהלך העבודה על המטלות, מותר להתייעץ עם סטודנטים אחרים ולחפש מידע באינטרנט. עם זאת, חל איסור להעתיק קטעי קוד שלמים ממקורות חיצוניים, כולל סטודנטים אחרים, אתרי אינטרנט ומודלי בינה מלאכותית (כגון ChatGPT).
+During work on assignments, you may consult with other students and search for information online. However, it is forbidden to copy complete code segments from external sources, including other students, websites, and AI models (such as ChatGPT).
 
-יש לדווח על כל עזרה שקיבלתם, בין אם מדובר בהתייעצות עם סטודנטים אחרים או במידע שנמצא באינטרנט, בהתאם ל[תקנון היושר של המחלקה](https://www.ariel.ac.il/wp/cs/wp-content/uploads/sites/88/2020/08/Guidelines-for-Academic-Integrity.pdf).
-**במקרה של שימוש בכלי בינה מלאכותית (AI), יש לצרף את הפרומפטים שהוזנו ואת התשובות שהתקבלו**.
+All assistance received must be reported, whether from other students or online sources, in accordance with the [department's integrity policy](https://www.ariel.ac.il/wp/cs/wp-content/uploads/sites/88/2020/08/Guidelines-for-Academic-Integrity.pdf).
+**When using AI tools, you must attach the prompts you entered and the responses received.**
 
-## הקדמה
+## Overview
 
-מטלה זו היא חלק מהקורס "C++ תכנות מתקדם" ומטרתה להדגים שני נושאים מרכזיים:
+This assignment focuses on two core topics:
 
-1. **העתקה עמוקה (Deep Copy)** — בעיקר במחלקות שמחזיקות זיכרון דינמי (`new[]`).
-2. **אופרטורי המרה מפורשים (Explicit Conversion Operators)** — המרות בין טיפוסים באמצעות קאסט מפורש, למשל המרת מספר מרוכב ל-`double` (גודל), `std::string` (ייצוג טקסטואלי), `bool` (אפס/לא אפס).
+1. **Deep Copy** — classes that manage dynamic memory (`new[]`) must implement a copy constructor, assignment operator, and destructor that perform deep (independent) copies.
+2. **Explicit Conversion Operators** — converting between types using explicit casts, e.g., converting a complex number to `double` (magnitude), `std::string` (text representation), and `bool` (zero/non-zero check).
 
-**חשוב**: אופרטורי ההמרה מוגדרים כ-`explicit` כדי למנוע ביצוע אוטומטי ודו משמעות:
-- `double d = (double)c;` — עובד (קאסט מפורש)
-- `double d = c;` — **לא עובד** (מנע חדות)
-- `if (c) { ... }` — עובד בהקשר בוליאני (exclusive)
+The assignment is based on a complex number system:
+- `Complex` — a complex number with arithmetic, comparison, and explicit conversion operators.
+- `ComplexArray` — a dynamic array of `Complex` objects that demonstrates deep copy.
 
-התרגיל מתבסס על מערכת מספרים מרוכבים:
-- `Complex` — מספר מרוכב ותמיכה באופרטורים רבים + אופרטורי המרה מפורשים
-- `ComplexArray` — מערך דינמי של `Complex` המדגים deep copy בצורה קריטית
+## Requirements
 
-## מבנה המטלה
+You must implement the following files from scratch:
 
-במטלה זו תתבקשו **ליצור ולממש** את קבצי המימוש `Complex.cpp` ו-`ComplexArray.cpp` עבור המחלקות `Complex` ו-`ComplexArray`, על בסיס קבצי ה-header שסופקו.
+- **`Complex.hpp`** and **`Complex.cpp`** — the `Complex` class in namespace `complex_math`
+- **`ComplexArray.hpp`** and **`ComplexArray.cpp`** — the `ComplexArray` class in namespace `complex_math`
+- **`StudentTest.cpp`** — your own test file with at least 20 test cases (different from those in `test.cpp`)
 
-## דרישות והנחיות
+Your implementation must:
+- Compile and run without errors
+- Pass all tests in `test.cpp`
+- Implement correct deep copy semantics in `ComplexArray`
 
-- ליצור ולממש את `Complex.cpp` ו-`ComplexArray.cpp` על בסיס קבצי ה-header
-- לוודא שהקוד מתקמפל ופועל ללא שגיאות
-- לממש **deep copy** נכון:
-  - Copy constructor
-  - Assignment operator
-  - Destructor
-- לעבור בהצלחה את הטסטים ב-`test.cpp`
+## Files Provided
 
-## תכונות C++ שיש להדגים
+- **`main.cpp`** — full usage demo with expected output in comments
+- **`test.cpp`** — unit tests your implementation must pass
+- **`doctest.h`** — testing framework
+- **`Makefile`** — build and run commands
 
-1. **Deep Copy** במחלקה שמחזיקה `Complex* data`
-2. **Explicit Conversion Operators** במחלקה `Complex`:
-   - `explicit operator double()`
-   - `explicit operator bool()` 
-   - `explicit operator std::string()`
-3. **Operator Overloading**: אופרטורים אריתמטיים, השוואה, זרמים, `++`/`--`
-4. **Composition**: `ComplexArray` מכילה מערך של `Complex`
-5. **ניהול זיכרון דינמי**: `new[]` / `delete[]`
-6. **בדיקות יחידה**: doctest
-
-## קבצים במטלה
-
-### קבצים שסופקו:
-- **Complex.hpp**
-- **ComplexArray.hpp**
-- **main.cpp** — הדגמה עם פלט צפוי בהערות
-- **test.cpp**
-- **doctest.h**
-- **Makefile** — קימפול והרצה
-
-### קבצים שעליכם ליצור ולממש:
-- **Complex.cpp**
-- **ComplexArray.cpp**
-
-## הוראות קימפול והרצה
+## Build and Run
 
 ```bash
-make        # מקמפל ומריץ את התוכנית הראשית
-make test   # מקמפל ומריץ את בדיקות היחידה
-make clean  # מנקה את כל קבצי הקימפול
+make              # compile and run the demo
+make test         # compile and run the unit tests
+make student_test # compile and run your StudentTest.cpp (must have 20+ test cases)
+make tidy         # run clang-tidy static analysis
+make clean        # remove build artifacts
 ```
 
-## טיפים להשלמת המטלה
+## Submission
 
-- בדקו self-assignment ב-`operator=`
-- לאחר `delete[] data` תמיד ודאו שהאובייקט נשאר במצב תקין
-- ודאו שהעתקה עמוקה באמת מייצרת מערך חדש ולא מעתיקה רק מצביע
-- הריצו את הטסטים אחרי כל שלב
-
-## הגשה
-
-יש להגיש את כל הקבצים המלאים. וודאו שהקוד מתקמפל ורץ כראוי לפני ההגשה.
+Submit all files you created. Verify that your code compiles and runs correctly before submitting.
 
 ---
 
-בהצלחה!
+Good luck!
