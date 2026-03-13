@@ -47,8 +47,8 @@ int main() {
     Complex c5 = Complex:: fromPolar(5.0, 0.927295);  // 5∠53.13° ≈ 3+4i
     cout << "c5 (from polar 5∠53.13°): " << c5 << endl;       // Expected: ≈3+4i
 
-    // --- 2. CONVERSION OPERATORS (NEW - Assignment 5 Focus) ---
-    cout << "\n=== 2. CONVERSION OPERATORS (Assignment 5 - NEW!) ===" << endl;
+    // --- 2. CONVERSION OPERATORS ---
+    cout << "\n=== 2. CONVERSION OPERATORS ===" << endl;
     
     Complex c6(3.0, 4.0);  // 3+4i, magnitude = 5
     
@@ -185,7 +185,7 @@ int main() {
 
     // ============ PART 2: COMPLEXARRAY CLASS ============
     
-    printSeparator("PART 2: COMPLEX ARRAY (Deep Copy Focus)");
+    printSeparator("PART 2: COMPLEX ARRAY");
 
     // --- 10. COMPOSITION (ComplexArray HAS-A Complex*) ---
     cout << "\n=== 10. COMPOSITION (ComplexArray HAS-A Complex array) ===" << endl;
@@ -198,8 +198,8 @@ int main() {
     cout << "Created ComplexArray arr1: " << arr1 << endl;
     cout << "Size: " << arr1.getSize() << endl;                         // Expected: 3
     
-    // --- 11. DEEP COPY CONSTRUCTOR (Assignment 5 - CRITICAL!) ---
-    cout << "\n=== 11. DEEP COPY CONSTRUCTOR (Assignment 5 Focus!) ===" << endl;
+    // --- 11. DEEP COPY CONSTRUCTOR ---
+    cout << "\n=== 11. DEEP COPY CONSTRUCTOR ===" << endl;
     
     cout << "\n--- Demonstrating Shallow vs Deep Copy ---" << endl;
     cout << "Original arr1: " << arr1 << endl;
