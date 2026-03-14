@@ -11,8 +11,8 @@ all: demo
 demo: main.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o demo
 
-test: TestRunner.o $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o test
+test: TestRunner.o $(OBJECTS) student_test
+	$(CXX) $(CXXFLAGS) TestRunner.o $(OBJECTS) -o test
 	./test
 
 student_test: StudentTestRunner.o $(OBJECTS)
